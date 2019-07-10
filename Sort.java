@@ -100,13 +100,48 @@ public class Sort {
         }
     }
 
+    public void quickSort (int[] a, int n) {
+        this.quickSort_c(a, 0, n - 1);
+    }
+
+    private void quickSort_c (int[] a, int start, int end) {
+        if (start >= end) {return;}
+        int center = partition(a, start, end);
+        quickSort_c(a, start, center - 1);
+        quickSort_c(a, center + 1, end);
+    }
+
+    private int partition (int[] a, int start, int end) {
+        int value = a[end];
+        int i = start; 
+        for (int j = start; j <= end - 1; j++) {
+            if (a[j] < value) {
+                int tmp = a[j];
+                a[j] = a[i];
+                a[i] = tmp;
+                i ++;
+            }
+
+            for (int h = 0; h < 8 ; h++) {
+                System.out.print(a[h] + ",");
+            }
+            System.out.println();
+        }
+
+        int tmp = a[i];
+        a[i] = a[end];
+        a[end] = tmp;
+        return i;
+    }
+
 
     public static void main(String[] args) {
         int a[] = {2,3,39,6,30,1,7,18};
         // new Sort().bubbleSort(a, 8);
         // new Sort().insertionSort(a, 8);
         // new Sort().selectionSort(a, 8);
-        new Sort().mergeSort(a, 8);
+        // new Sort().mergeSort(a, 8);
+        new Sort().quickSort(a, 8);
         for (int i = 0; i < 8 ; i++) {
             System.out.print(a[i] + ",");
         }
